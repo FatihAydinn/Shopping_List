@@ -12,12 +12,13 @@
     <textarea asp-for="ProductDescription" class="form-control" style="width:30%"></textarea>
     <br />
     <label for="exampleFormControlInput1">Category</label>
-    <select asp-for="ProductCategory" class="form-select" style="width:30%">
-        <option disabled="disabled" selected="true" value="-1">Select Category</option>
+    <input asp-for="ProductCategory" autocomplete="off" class="form-control" style="width:30%" />
+@*    <select asp-for="ProductCategory" class="form-select" style="width:30%">
+        <option selected="true" value="-1">Select Category</option>
         <option value="Manav">Manav</option>
         <option value="Market">Market</option>
         <option value="Züccaciye">Züccaciye</option>
-    </select>
+    </select>*@
     @Html.ValidationMessageFor(model => model.ProductCategory, "", new { @class = "text-danger" })
     <br />
     <br />
