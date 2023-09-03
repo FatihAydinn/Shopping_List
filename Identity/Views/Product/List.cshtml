@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Product>
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Title</th>
+            <th style="text-align:center" scope="col">Description</th>
+            <th scope="col">Category</th>
+            <th style="text-align:center" scope="col">Image</th>
+            <th scope="col">
+                <button class="btn btn-sm btn-warning">@Html.ActionLink("Create","Create",new{},new{@class="hyperlink"})</button>
+            </th>
+            <th scope="col">
+                <button class="btn btn-sm btn-secondary">@Html.ActionLink("Back to Index","Index","Home",new{},new{@class="hyperlink"})</button>
+            </th>
+            </tr>
+            @*<th scope="col">#</th>*@
+        </thead>
+    @foreach (Product item in Model)
+    {
+        <tbody>
+        <tr>
+        <td>@Html.DisplayFor(x=>item.ProductTilte)</td>
+        <td>@Html.DisplayFor(x=>item.ProductDescription)</td>
+        <td>@Html.DisplayFor(x=>item.ProductCategory)</td>
+        <td>@Html.Image(item.ImageUrl,150,150)</td>
+        <td>
+            <button class="btn btn-sm btn-primary">@Html.ActionLink("Edit","Edit",new {id=item.ProductId},new{@class="hyperlink"})</button>
+        </td>
+        <td>
+            <button class="btn btn-sm btn-danger">@Html.ActionLink("Delete","Delete",new {id=item.ProductId},new{@class="hyperlink"})</button>
+        </td>
+        </tr>
+        </tbody>
+    }
+    </table>

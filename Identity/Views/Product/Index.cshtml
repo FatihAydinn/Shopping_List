@@ -1,0 +1,47 @@
+﻿@model List<Product>
+<div class="row">
+    <div class="col-3">
+<form asp-action="Index" method="get">
+    <input type="text" name="search" placeholder="Ürün Ara..." />
+    <button type="submit">Ara</button>
+</form>
+    </div>
+    <div class="col-3"></div>
+    <div class="col-3"></div>
+    <div class="col-3">
+<form asp-action="Index" method="get">
+    <select name="category">
+        <option value="">Tüm Kategoriler</option>
+        <option value="Manav">Manav</option>
+        <option value="Züccaciye">Züccaciye</option>
+        <option value="Market">Market</option>
+        <!-- Diğer kategoriler -->
+    </select>
+    <button type="submit">Listele</button>
+</form>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th style="text-align:center">Description</th>
+            <th>Img</th>
+            <!-- Diğer sütunlar -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td><b>@product.ProductTilte</b> </td>
+                <td class="ml-5" style="font-size:small;text-align:center">@product.ProductDescription</td>
+                <td>@Html.Image(product.ImageUrl,150,150)</td>
+                <!-- Diğer hücreler -->
+            </tr>
+        }
+    </tbody>
+</table>

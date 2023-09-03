@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ShoppingList>
+<head>
+    <!-- Option 1: Include in HTML -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css” />
+    <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css” />
+</head>
+<h1 class="text-center display-4">Shopping List</h1>
+<hr />
+<br />
+    <table class="table" style="margin-bottom:450px;">
+        <thead>
+            <tr>
+            <th style="padding-left:50px" scope="col"><h2>Title</h2></th>
+
+            <th scope="col" style="text-align:right;">
+                @*<button style="width:25%;margin-right:50px;" class="btn btn-lg btn-danger">*@
+                    @Html.ActionLink("Create","Create",new{},new {@class="hyperlink btn btn-lg btn-danger",@style="width:15%;"})
+                    @*</button>*@
+                </th>
+            </tr>
+        </thead>
+    @foreach (ShoppingList item in Model)
+    {
+        <tbody>
+            <tr style="margin:auto;">
+            <th style="padding-left:75px;padding-bottom:15px;padding-top:15px" scope="col">
+                <h4>@Html.DisplayFor(x=>item.ListTitle)</h4>
+            </th>
+            <th style="text-align:right;" scope="col">
+                @*<form method="post">*@
+                @Html.ActionLink("Detail","Details",new {id = item.ListId},new {@class="hyperlink btn btn-lg btn-primary",@style="width:15%;margin-right:50px;"})
+                <button class="btn btn-sm"> @Html.ActionLink("","DeleteList",new{id=item.ListId},new{@class="btn btn-danger bi bi-trash"})
+                </button>
+                @*<form method="post" asp-controller="List" asp-action="DeleteList">
+                <button class="btn btn-lg btn-danger" name="id" value="@item.ListId">Delete</button>
+                </form>*@
+
+            </th>
+        </tr>
+    </tbody>
+}
+    </table>

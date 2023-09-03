@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model ShoppingList
+@inject UserManager<CustomUser> UserManager 
+<h1 style="text-align:center">Create new Shopping List</h1>
+<hr />
+<br />
+    <p hidden>User ID: @UserManager.GetUserId(User)</p>
+<form method="post">
+        <label for="exampleFormControlInput1">Title</label>
+        @Html.TextBoxFor(x=>x.ListTitle,new{@class="form-control",@style="width:30%"})
+    <br />
+    <br />
+    <button class="btn btn-lg btn-primary">Create</button> |
+    <button class="btn btn-lg btn-danger">
+        @Html.ActionLink("Back to List","List",new{},new {@class="hyperlink"})
+    </button>
+</form>

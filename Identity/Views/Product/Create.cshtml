@@ -1,0 +1,33 @@
+﻿@model Product
+
+<form asp-action="Create">
+
+    <label for="exampleFormControlInput1">Title</label>
+    <input asp-for="ProductTilte" class="form-control" style="width:30%" />
+    @Html.ValidationMessageFor(m=>m.ProductTilte,"",new{@class="text-danger"})
+    <span class="text-danger"> @Html.ViewBag.Exists </span>
+    <br />
+    <br />
+    <label for="exampleFormControlInput1">Description</label>
+    <textarea asp-for="ProductDescription" class="form-control" style="width:30%"></textarea>
+    <br />
+    <label for="exampleFormControlInput1">Category</label>
+    <select asp-for="ProductCategory" class="form-select" style="width:30%">
+        <option disabled="disabled" selected="true" value="-1">Select Category</option>
+        <option value="Manav">Manav</option>
+        <option value="Market">Market</option>
+        <option value="Züccaciye">Züccaciye</option>
+    </select>
+    @Html.ValidationMessageFor(model => model.ProductCategory, "", new { @class = "text-danger" })
+    <br />
+    <br />
+    <label for="exampleFormControlInput1">ImageUrl</label>
+    <input asp-for="ImageUrl" class="form-control" style="width:30%" />
+    @Html.ValidationMessageFor(m=>m.ProductTilte,"",new{@class="text-danger"})
+    <br />
+    <br />
+    <button class="btn btn-danger"><a class="hyperlink" asp-action="List">Back to List</a></button> |
+    <input class="btn  btn-primary" value="Create" type="submit"/> 
+
+    <br />
+</form>

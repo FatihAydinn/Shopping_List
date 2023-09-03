@@ -1,0 +1,118 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model ShoppingListDto
+@inject UserManager<CustomUser> UserManager
+<head>
+    <style>
+        .borderless td, .borderless th {
+            border: none;
+        }
+    </style>
+</head>
+<div>
+    <h4 class="display-4 text-center">Product Detail</h4>
+    <hr />
+        <div class="row mt-5">
+            <div class="col-md-8">
+            <table class="table borderless">
+            <tr>
+            <th scope="row">Title</th>
+            <td class="col-9">
+            @Html.DisplayFor(model => model.product.ProductTilte)
+            </td>
+            </tr>
+            <tr>
+            <th scope="row">Description</th>
+            <td>
+            @Html.DisplayFor(model => model.product.ProductDescription)
+            </td>
+            </tr>
+
+            <tr>
+            <th scope="row">Category</th>
+            <td>
+            @Html.DisplayFor(model => model.product.ProductCategory)
+            </td>
+            </tr>
+        </table>
+            </div>
+            <div class="col-md-4 text-center">
+
+        <div>
+            @Html.Image(Model.product.ImageUrl,400,300)
+        </div>
+            </div>
+        </div>
+
+    <hr class="mt-5 mb-5" />
+
+        @{
+            bool editExists = false;
+        }
+        <form method="post">
+      @*<input type="hidden" asp-for="listDetails.ProductTitle" value="@Model.product.ProductTilte" />*@
+        @*@ViewBag.CurrentPageId*@
+      <input type="hidden" asp-for="listDetails.ProductTitle" value="@Model.product.ProductTilte" />
+      <input type="hidden" asp-for="listDetails.ProductId" value="@Model.product.ProductId" />
+      <input type="hidden" asp-for="listDetails.ImageUrl" value="@Model.product.ImageUrl"/>
+      @*<input asp-for="listDetails.HeaderId" value="@Model.listHeaders" />*@
+        <div class="row">
+        <dt class="col-sm-3">List</dt>
+        <dd class="col-sm-9">
+            @*<div class="col-sm-7">*@
+            <select asp-for="listDetails.ListId" style="width:50%;" class="col-sm-5 form-select">
+            <option disabled="disabled" selected="true" value="-1">Choose a List</option>
+            @Html.ValidationMessageFor(model => model.ShoppingList)
+            @if (Model != null && Model.ShoppingList != null)
+            {
+                @foreach (ShoppingList item in Model.ShoppingList)
+                    {
+                   @foreach (ListDetails listDetails in Model.listDetails2)
+                    {
+                    if (listDetails.ListId == item.ListId)
+{}}
+                        if (item.Status == "Edit")
+                        {
+                            <option value="@item.ListId">@item.ListTitle</option>
+                            editExists = true;
+                        }
+                        else{
+                            <option disabled="disabled" value="@item.ListId">@item.ListTitle</option>
+                        }
+                    }
+            }
+            </select>
+                </div>
+        </dd>
+
+        <hr style="color:white" class="mt-2"/>
+        <div class="row">
+        <dt class="col-sm-3 mt-4">
+            Description
+        </dt>
+        <dd class="col-sm-9">
+            <textarea asp-for="listDetails.Description" style="width:50%;" class="form-control" rows="3" cols="34"></textarea>
+        </dd>
+        </div>
+        <div class="row">
+            <div class="col-sm-4"></div>
+                <div class="col-sm-2 mt-3 text-center">
+            @if (editExists == true)
+            {
+                <button asp-route-currentPageId="@ViewBag.CurrentPageId" class="btn btn-lg btn-primary">Add to List</button>
+            }
+            else{
+                <b class="text-danger">
+                    Ürünü listene eklemek için bir liste oluşturmalısın.
+                </b>
+            }
+                </div>
+            <div class="col-sm-8"></div>
+        </div>
+        </form>
+    </dl>
+</div>
+
+<div>
+    @*@Html.ActionLink("Edit", "Edit", new {  id = model.product.ProductId }) |*@
+    <button class="btn btn-sm btn-danger"><a class="hyperlink" asp-action="Index">Back to List</a></button>
+</div>

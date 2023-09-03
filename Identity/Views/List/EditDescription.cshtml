@@ -1,0 +1,36 @@
+﻿@model ListDetails
+@*@inject ListDetails listDetails*@
+
+@*list harici çekmeye çalış*@
+
+    <form method="post" asp-controller="List" asp-action="EditDescription">
+        <center>
+    <textarea asp-for="Description" class="form-control mt-5" style="width:35%">@Html.DisplayFor(x=>x.Description)</textarea>
+        <br />
+        @*@Html.DisplayFor(x=>x.ProductId)*@
+        <input type="hidden" asp-for="ProductId" value="@Model.ProductId" />
+        <input type="hidden" asp-for="DetailsId" value="@Model.DetailsId" />
+        <input type="hidden" asp-for="ListId" value="@Model.ListId" />
+        <br />
+        <br />
+    <button type="submit" class="btn btn-lg btn-primary mb-5">Update</button>
+        </center>
+
+
+@*@foreach (ListDetails lditem in Model)
+{
+        <center>
+            <br />
+    <br />
+        <textarea asp-for="@lditem.Description" class="form-control mt-5" style="width:35%">@lditem.Description</textarea>
+
+@{ListDetails listDetailss = new ListDetails();}
+
+        <input asp-for="@lditem.ProductId" value="@lditem.ProductId"/>
+
+    @Html.DisplayFor(x=>x.listDetail.Description)
+
+        <button type="submit" class="btn btn-lg btn-primary mb-5">Update</button>
+    </center>
+}*@
+    </form>

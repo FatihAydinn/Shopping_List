@@ -1,0 +1,79 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h1 class="display-2 text-center">Product List</h1>
+<br />
+<hr />
+<div class="row">
+    <div class="col-5">
+        <form asp-action="Index" method="get">
+            <div class="input-group mb-3">
+                <input style="width:30%" class="form-control" type="text" name="search" placeholder="Search..." />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-5">
+        <form asp-action="Index" method="get">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <button class="btn btn-outline-primary" type="submit">Filter</button>
+                </div>
+                @{
+                    List<string> listedCategories = new List<string>();
+                    foreach (Product item in Model)
+                    {
+                        if (!listedCategories.Contains(item.ProductCategory))
+                        {
+                            listedCategories.Add(item.ProductCategory);
+                        }
+                    }
+                }
+                <select style="width:50%;text-align:center;" class="form-select" name="category">
+                    <option selected value="">All Categories</option>
+                    @foreach (string item in listedCategories)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+                @*<select style="width:50%;text-align:center;" class="form-select" name="category">
+                <option selected value="">All Categories</option>
+                <option value="Manav">Manav</option>
+                <option value="Market">Market</option>
+                <option value="Züccaciye">Züccaciye</option>
+                </select>*@
+            </div>
+        </form>
+    </div>
+</div>
+@*<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<hr />*@
+   <form>
+    <div class="card-group ml-5 container" style="margin-left:85px">
+@foreach (Product item in Model)
+{
+    <div style="margin-right:25px;margin-left:50px;" class="mt-5">
+    <div class="card" style="width: 18rem;text-align:left">
+        <img class="card-img-top" src="@item.ImageUrl" height="200" alt="Ürün Resmi">
+        <div class="card-body">
+            <h5 style="text-align:center" class="card-title">@Html.DisplayFor(x=>item.ProductTilte)</h5>
+            <p class="card-text" style="font-size:small;text-align:center">@Html.DisplayFor(x=>item.ProductDescription)</p>
+
+            @*<button type="button" class="btn btn-primary btn-sm btn-block">
+                <p style="margin-left:100px;margin-right:100px;margin-bottom:0">*@
+                    @Html.ActionLink("Details","Details",new {id = item.ProductId},new {@class="hyperlink btn btn-primary btn-sm btn-block",@style="margin-left:0px;margin-right:100px;margin-bottom:0;width:100%",@type="button"})
+                @*</p>
+            </button>*@
+        </div>
+    </div>
+    </div>
+}
+    </div>
+</form>

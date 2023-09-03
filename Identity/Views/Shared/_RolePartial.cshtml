@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomUser> SignInManager
+@inject UserManager<CustomUser> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+    if (user != null)
+    {
+        if (user.Role == "Admin"){
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="List">Product</a>
+            </li>
+        }
+        else if(user.Role == "User")
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="List" asp-action="List">List</a>
+            </li>
+        }
+    }
+        
+}

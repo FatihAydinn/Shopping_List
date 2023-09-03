@@ -1,0 +1,73 @@
+﻿@model ListDto
+<head>
+    <!-- Option 1: Include in HTML -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+@if (Model == null)
+{
+    <div class="alert alert-danger display-4 text-center">Liste Boş!</div>
+}
+else
+{
+    <h1 class="text-center display-4">Shopping List</h1>
+
+    <hr />
+    <table class="table table-bordered">
+    <tbody>
+@foreach(ListDetails item in Model.listDetails){
+        <tr >
+            <th style="padding:75px">@item.ProductTitle</th>
+            <td class="text-center">@Html.Image(item.ImageUrl,200,150)</td>
+            <td style="padding:75px">@item.Description</td>
+@{
+@foreach (ShoppingList slitem in Model.ShoppingList)
+{
+    @if (slitem.ListId == @ViewBag.CurrentPageId)
+    {   
+@if (slitem.Status == "Edit")
+    {
+            <td class="text-center">
+            <button class="btn btn-sm">@Html.ActionLink("Edit","EditDescription",new{id = item.DetailsId},new {@class="btn btn-sm btn-primary",@style="margin-top:55px"})</button>
+            </td>
+                          
+        <td class="text-center">
+            <button class="btn btn-sm">@Html.ActionLink("","DeleteProduct",new {id=item.DetailsId},new{@class="hyperlink btn btn-sm btn-danger bi bi-trash",@style="margin-top:55px;"})</button>
+        </td>
+    }
+else{
+
+                <td class="text-center">
+            <button class="btn btn-sm btn-danger" style="margin-top:60px">@Html.ActionLink("Alındı","DeleteProduct",new {id=item.DetailsId},new{@class="hyperlink"})</button>
+        </td>
+}
+}
+}
+}
+        </tr>
+}
+</tbody>
+</table>
+
+<form method="post">
+<center>
+@{
+@foreach (ShoppingList item in Model.ShoppingList)
+   {
+    if (item.ListId == @ViewBag.CurrentPageId)
+    {
+    if (item.Status == "Edit")
+    {
+     <button asp-controller="List" asp-action="Details2" asp-route-shoppingListId="@item.ListId" asp-route-currentPageId="@ViewBag.CurrentPageId" class="btn btn-success btn-lg mt-2">Alışverişe Çıkıyorum!</button>                        
+    }
+    else{
+     <button asp-controller="List" asp-action="Details2" asp-route-shoppingListId="@item.ListId" asp-route-currentPageId="@ViewBag.CurrentPageId" class="btn btn-danger btn-lg mt-2">Alışveriş Tamamlandı!</button>
+     }
+    }
+}
+}
+</center>
+</form>
+}    
+<div>
+    <button  class="btn btn-sm btn-danger mt-5"><a class="hyperlink" asp-action="List">Back to List</a></button>
+</div>
